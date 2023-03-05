@@ -28,19 +28,31 @@ describe('suite name',() => {
       cy.get("span.title").contains("Products");  
       
       cy.url().should('include','saucedemo');
-      cy.url().should('eq','https://www.saucedemo.com');
+      cy.url().should('eq','https://www.saucedemo.com/inventory.html');
       cy.url().should('contain','saucedemo');
 
       //Another way to write is, you don't need to write cy.url() and capturing the url multiple times
       cy.url().should('include','saucedemo')
-      .should('eq','https://www.saucedemo.com') 
+      .should('eq','https://www.saucedemo.com/inventory.html') 
       .should('contain','saucedemo');
 
       //Another way is to use and instead of using Should multiple times
       cy.url().should('include','saucedemo')
-      .and('eq','https://www.saucedemo.com') 
+      .and('eq','https://www.saucedemo.com/inventory.html') 
       .and('contain','saucedemo');
 
+      //Negative assertions
+      cy.url().should('include','saucedemo')
+      .and('eq','https://www.saucedemo.com/inventory.html') 
+      .and('contain','saucedemo')
+      .and('not.contain','xyx');
+   }),
+   it("verify the element visiblity", ()=>{
+
+      cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+      cy.get("#user-name").should('be.visible')
+      .and('exists');
 
    })
+   
 })
